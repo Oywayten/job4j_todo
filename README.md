@@ -1,5 +1,5 @@
 ### TODO List Project 
-\- a simple task tracker to create and track tasks.  
+> \- a simple task tracker to create and track tasks.  
 The application displays a list of all tasks. Tasks can be created, deleted and edited.
 
 ## Technology stack: 

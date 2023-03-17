@@ -24,13 +24,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav">
-                <a class="nav-item nav-link"
+                <a class="nav-item nav-link active"
                    th:href="@{/tasks}"> Все </a>
                 <a class="nav-item nav-link"
                    th:href="@{/tasks?done=true}"> Выполненные </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks?create=${#dates.format(#dates.createNow(),'YYYY-MM-dd')} + '00:00:00'}"> Новые </a>
-
+                   th:href="@{/tasks?done=false}"> Новые </a>
             </div>
         </div>
     </nav>
@@ -41,8 +40,8 @@
             </div>
         </div>
         <div class="card text-bg-dark col-sm-9">
-            <p dir="auto">- a simple task tracker to create and track tasks.<br>
-                The application displays a list of all tasks. Tasks can be created, deleted and edited.</p>
+            <p dir="auto" style="background-color: #595959">- a simple task tracker to create and track tasks.<br>
+                The application displays a list of all tasks. Tasks can be created, deleted and edited."</p>
             <h2>
                 Technology stack:
             </h2>

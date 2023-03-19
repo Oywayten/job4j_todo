@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  * Oywayten 15.03.2023.
  */
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"description", "created"}, name = "description_created")})
 @Data
 public class Task {
 
@@ -24,11 +25,10 @@ public class Task {
 
     @CreationTimestamp
     @NotNull
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false, nullable = false, columnDefinition = "TIMESTAMP NOT NULL DEFAULT current_timestamp")
     private LocalDateTime created;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
     private boolean done;
-
 }

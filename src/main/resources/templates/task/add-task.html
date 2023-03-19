@@ -5,18 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS todo: change Bootstrapversion -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <title>TODO List</title>
     <style>
@@ -25,9 +18,9 @@
         }
     </style>
 </head>
-<body>
+<body class="body text-bg-dark">
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">TODO List</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,18 +29,18 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks}"> Все </a>
+                   th:href="@{/tasks}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks?done=true}"> Выполненные </a>
+                   th:href="@{/tasks?done=true}"> Completed </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks?done=false}"> Новые </a>
+                   th:href="@{/tasks?done=false}"> New </a>
             </div>
         </div>
     </nav>
     <div class="row">
-        <div class="card" style="width: 100%">
+        <div class="card text-bg-dark" style="width: 100%">
             <div class="card-header">
-                Новая задача.
+                New task
             </div>
             <div class="card-body">
                 <!--                <div th:if="${message != null}" class="alert alert-danger" role="alert" th:text="${message}">
@@ -57,19 +50,15 @@
 <!--                    Проверить. Кажется на топджаве мы null получали тут-->
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
-                        <label for="description">Описание задания <span class="red">*</span>
-                            <input type="text" class="form-control" name="description" id="description"
-                                   th:placeholder="${task.description}" required>
-                        </label>
-                        <label for="created">Дата создания <span class="red">*</span>
-                            <input type="text" class="form-control" name="created" id="created"
-                                   th:placeholder="${task.created}" required>
+                        <label for="description">Description <span class="red">*</span>
+                            <input type="text" class="form-control my-3" name="description" id="description"
+                                   placeholder="Enter a description" required>
                         </label>
                     </div>
 <!--                    <input type="hidden" name="created" th:value="${#dates.createNow()}"/> todo: удалить, если не надо -->
                     <!--### возможно надо убрать, так как в базе делается-->
 <!--                    <input type="hidden" name="done" value="false"/>-->
-                    <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>

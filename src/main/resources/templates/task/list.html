@@ -13,9 +13,9 @@
     <title>TODO List</title>
 
 </head>
-<body class="body bg-dark">
+<body class="body text-bg-dark">
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#" th:href="@{/index}">TODO List</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -25,14 +25,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active"
-                   th:href="@{/tasks}"> Все </a>
+                   th:href="@{/tasks}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks?done=true}"> Выполненные </a>
+                   th:href="@{/tasks/?done=true}"> Completed </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks?done=false}"> Новые </a>
-                <button class="btn btn-primary btn-sm"
-                        th:href="@{/formAddTask}"> Добавить задачу
-                </button>
+                   th:href="@{/tasks?done=false}"> New </a>
+                <a class="nav-item nav-link text-bg-primary"
+                        th:href="@{/addTaskForm}"> Add task
+                </a>
             </div>
         </div>
     </nav>
@@ -44,34 +44,33 @@
             <!--            class="btn btn-info btn-sm"-->
 
             <div class="card-body">
-                <table class="table text-bg-dark">
+                <table class="table table-dark table-hover">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Описание задания</th>
-                        <th scope="col">Дата создания</th>
-                        <th scope="col">Результат</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Result</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-group-divider">
                     <tr th:each="task: ${tasks}">
                         <td th:utext="*{task.id}"> 1</td>
                         <td>
                             <a th:href="@{|/tasks/${task.id}|}"
                                th:utext="*{task.description}"
-                               href="https://ya.ru"> Это тестовое описание</a>
+                               href="https://ya.ru"> This is a test description</a>
                         </td>
-                        <td th:utext="*{task.created}">
+                        <td>
                             <a th:href="@{|/tasks/${task.id}|}"
-                               th:utext="*{task.description}"
-                               href="https://ya.ru"> 16-03-2023 0:47
-                            </a>
+                               th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm')}"
+                               href="https://ya.ru"> This is a test description</a>
                         </td>
-                        <td th:text="${task.done} ? 'Выполнено': 'Новое'">
+                        <td >
                             <a th:href="@{|/tasks/${task.id}|}"
-                               th:utext="*{task.description}"
+                               th:text="${task.done} ? 'Completed': 'New'"
                                href="https://ya.ru">
-                                Выполнено
+                                Completed
                             </a>
                         </td>
                     </tr>

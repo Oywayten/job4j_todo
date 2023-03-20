@@ -27,7 +27,7 @@
                 <a class="nav-item nav-link"
                    th:href="@{/tasks}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks//completed}"> Completed </a>
+                   th:href="@{/tasks/completed}"> Completed </a>
                 <a class="nav-item nav-link"
                    th:href="@{/tasks/new}"> New </a>
             </div>
@@ -57,11 +57,11 @@
         </div>
     </div>
     <div>
-        <form th:action="@{/completeTask}" method="POST" th:object="${task}" style="display: inline">
+        <form th:if="${task.done == false}" th:action="@{/completeTask}" method="POST" th:object="${task}" style="display: inline">
             <input type="hidden" name="id" th:value="*{id}"/>
             <button type="submit" class="btn btn-primary btn-sm m-1">Complete</button>
         </form>
-        <a type="button" class="btn btn-primary btn-sm m-1" th:href="@{|/formUpdateTask/${task.id}|}"> Edit
+        <a th:if="${task.done == false}" type="button" class="btn btn-primary btn-sm m-1" th:href="@{|/formUpdateTask/${task.id}|}"> Edit
         </a>
         <form th:action="@{/deleteTask}" method="POST" th:object="${task}" style="display: inline">
             <input type="hidden" name="id" th:value="*{id}"/>

@@ -30,17 +30,20 @@ The application displays a list of all tasks. Tasks can be created, deleted and 
 + ### Main page
 <img src="src/main/resources/image/index.png" width="660" title="Index page" alt="Main page with project description"/>
 
-+ ### All tasks
++ ### All tasks list
 <img alt="Page with all tasks list" src="src/main/resources/image/all-tasks.png" title="All tasks" width="660"/>
 
-+ ### Completed tasks
++ ### Completed tasks list
 <img alt="Page with all completed tasks list" src="src/main/resources/image/completed-tasks.png" title="All completed tasks" width="660"/>
 
-+ ### New tasks
++ ### New tasks list
 <img alt="Page with all new tasks list" src="src/main/resources/image/new-tasks.png" title="All new tasks" width="660"/>
 
-+ ### Task description
-<img alt="Task description" src="src/main/resources/image/task-description.png" title="Page for view task full info" width="660"/>
++ ### New task description
+<img alt="New task description" src="src/main/resources/image/new-task-description.png" title="Page for view new task full info and perform some actions" width="660"/>
+
++ ### Completed task description
+<img alt="Completed task description" src="src/main/resources/image/completed-task-description.png" title="Page for view completed task full info and delete" width="660"/>
 
 + ### Edit task
 <img alt="Edit task" src="src/main/resources/image/edit-task.png" title="Page for edit task" width="660"/>

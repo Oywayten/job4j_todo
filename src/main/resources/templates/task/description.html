@@ -41,6 +41,10 @@
             <div class="card-body">
                 <table class="table table-dark table-sm">
                     <tr>
+                        <th>Created</th>
+                        <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    </tr>
+                    <tr>
                         <th>Result</th>
                         <td th:text="${task.done} ? 'Completed': 'New'"></td>
                     </tr>

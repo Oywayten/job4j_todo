@@ -67,38 +67,25 @@ public class HibernateTaskRepository implements TaskRepository {
         return task;
     }
 
-    @Override
-    public Task add(Task task) {
+    public Task save(Task task) {
+        boolean isSave = false;
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.persist(task);
+            if (task.getId() == 0) {
+                session.persist(task);
+            } else {
+                session.update(task);
+            }
             transaction.commit();
+            isSave = true;
         } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
         } finally {
             session.close();
         }
-        return task.getId() == 0 ? null : task;
-    }
-
-    @Override
-    public boolean update(Task task) {
-        boolean isUpdated = false;
-        Session session = sf.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(task);
-        try {
-            transaction.commit();
-            isUpdated = true;
-        } catch (Exception e) {
-            transaction.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return isUpdated;
+        return isSave ? null : findById(task.getId());
     }
 
     @Override

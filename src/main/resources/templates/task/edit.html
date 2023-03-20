@@ -31,15 +31,15 @@
                 <a class="nav-item nav-link"
                    th:href="@{/tasks}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks?done=true}"> Completed </a>
+                   th:href="@{/tasks/completed}"> Completed </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks?done=false}"> New </a>
+                   th:href="@{/tasks/new}"> New </a>
             </div>
         </div>
     </nav>
     <div class="row">
         <div class="card text-bg-dark" style="width: 100%">
-            <div class="card-header" th:text="|Update task: ${task.title}|">
+            <div class="card-header" th:text="|Edit task: ${task.title}|">
             </div>
             <div class="card-body">
                 <form th:action="@{/updateTask}" method="POST" th:object="${task}">

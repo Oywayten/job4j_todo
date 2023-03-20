@@ -26,9 +26,21 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public String tasks(final Model model, @RequestParam(name = "done", required = false) Boolean done) {
-        model.addAttribute("tasks", taskService.getAll(done));
+    public String tasks(final Model model) {
+        model.addAttribute("tasks", taskService.getAll(null));
         return "task/list";
+    }
+
+    @GetMapping("/tasks/completed")
+    public String completedTaskList(final Model model) {
+        model.addAttribute("tasks", taskService.getAll(true));
+        return "task/completed-tasks-list";
+    }
+
+    @GetMapping("/tasks/new")
+    public String newTaskList(final Model model) {
+        model.addAttribute("tasks", taskService.getAll(false));
+        return "task/new-tasks-list";
     }
 
     @GetMapping("/tasks/{id}")
@@ -51,7 +63,7 @@ public class TaskController {
     @GetMapping("/formUpdateTask/{id}")
     public String createTask(final Model model, @PathVariable("id") int id) {
         model.addAttribute("task", taskService.findById(id));
-        return "task/update";
+        return "task/edit";
     }
 
     @PostMapping("/updateTask")

@@ -12,4 +12,14 @@ public interface TaskRepository {
     List<Task> getAll();
 
     List<Task> getAllDone(Boolean done);
+
+    Task findById(int id);
+
+    Task add(Task task);
+
+    boolean update(Task task);
+
+    boolean complete(int id);
+
+    boolean delete(int id);
 }

@@ -24,58 +24,45 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active"
+                <a class="nav-item nav-link"
                    th:href="@{/tasks}"> All </a>
                 <a class="nav-item nav-link"
                    th:href="@{/tasks/?done=true}"> Completed </a>
                 <a class="nav-item nav-link"
                    th:href="@{/tasks?done=false}"> New </a>
-                <a class="nav-item nav-link text-bg-primary"
-                   th:href="@{/addTaskForm}"> Add task
-                </a>
             </div>
         </div>
     </nav>
     <div class="row">
-        <div class="card text-bg-dark col-sm-9">
+        <div class="card text-bg-dark col-sm-5 my-3">
             <div class="card-header">
-                <h2 class="card-title fw-bold">TODO List Project</h2>
+                <h2 class="card-title fw-bold" th:text="${task.title}">Task 1 description</h2>
             </div>
             <div class="card-body">
-                <table class="table table-dark table-hover">
-                    <thead>
+                <table class="table table-dark table-sm">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Created</th>
-                        <th scope="col">Result</th>
+                        <th>Result</th>
+                        <td th:text="${task.done} ? 'Completed': 'New'"></td>
                     </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                    <tr th:each="task: ${tasks}">
-                        <td th:utext="*{task.id}"> 1</td>
-                        <td>
-                            <a th:href="@{|/tasks/${task.id}|}"
-                               th:text="*{task.title}"
-                               href="https://ya.ru"> This is a title</a>
-                        </td>
-                        <td>
-                            <a th:href="@{|/tasks/${task.id}|}"
-                               th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}"
-                               href="https://ya.ru"> This is a description</a>
-                        </td>
-                        <td>
-                            <a th:href="@{|/tasks/${task.id}|}"
-                               th:text="${task.done} ? 'Completed': 'New'"
-                               href="https://ya.ru">
-                                Completed
-                            </a>
-                        </td>
+                    <tr>
+                        <th>Description</th>
+                        <td th:text="${task.description}"></td>
                     </tr>
-                    </tbody>
                 </table>
             </div>
         </div>
+    </div>
+    <div>
+        <form th:action="@{/completeTask}" method="POST" th:object="${task}" style="display: inline">
+            <input type="hidden" name="id" th:value="*{id}"/>
+            <button type="submit" class="btn btn-primary btn-sm m-1">Complete</button>
+        </form>
+        <a type="button" class="btn btn-primary btn-sm m-1" th:href="@{|/formUpdateTask/${task.id}|}"> Edit
+        </a>
+        <form th:action="@{/deleteTask}" method="POST" th:object="${task}" style="display: inline">
+            <input type="hidden" name="id" th:value="*{id}"/>
+            <button type="submit" class="btn btn-primary btn-sm m-1">Delete</button>
+        </form>
     </div>
 </div>
 </body>

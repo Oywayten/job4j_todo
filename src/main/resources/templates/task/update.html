@@ -21,7 +21,7 @@
 <body class="body text-bg-dark">
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">TODO List</a>
+        <a class="navbar-brand" href="/">TODO List</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -39,25 +39,21 @@
     </nav>
     <div class="row">
         <div class="card text-bg-dark" style="width: 100%">
-            <div class="card-header">
-                New task
+            <div class="card-header" th:text="|Update task: ${task.title}|">
             </div>
             <div class="card-body">
-                <!--                <div th:if="${message != null}" class="alert alert-danger" role="alert" th:text="${message}">
-                                    Пользователь с такой почтой уже существует
-                                </div> todo: удалить, если не надо-->
-                <form th:action="@{/createTask}" method="POST">
-<!--                    Проверить. Кажется на топджаве мы null получали тут-->
-                    <input type="hidden" name="id" value="0"/>
+                <form th:action="@{/updateTask}" method="POST" th:object="${task}">
+                    <input type="hidden" name="id" th:value="*{id}"/>
                     <div class="form-group">
+                        <label for="title">Title <span class="red">*</span>
+                            <input type="text" class="form-control my-3" name="title" id="title"
+                                   th:value="*{title}" required>
+                        </label>
                         <label for="description">Description <span class="red">*</span>
                             <input type="text" class="form-control my-3" name="description" id="description"
-                                   placeholder="Enter a description" required>
+                                   th:field="*{description}" required>
                         </label>
                     </div>
-<!--                    <input type="hidden" name="created" th:value="${#dates.createNow()}"/> todo: удалить, если не надо -->
-                    <!--### возможно надо убрать, так как в базе делается-->
-<!--                    <input type="hidden" name="done" value="false"/>-->
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>

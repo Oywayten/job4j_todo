@@ -4,7 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 /**
@@ -19,16 +19,18 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
+    @NotBlank
+    @Column(nullable = false)
+    private String title;
+
+    @NotBlank
     @Column(nullable = false)
     private String description;
 
     @CreationTimestamp
-    @NotNull
     @Column(updatable = false, nullable = false, columnDefinition = "TIMESTAMP NOT NULL DEFAULT current_timestamp")
     private LocalDateTime created;
 
-    @NotNull
     @Column(nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
     private boolean done;
 }

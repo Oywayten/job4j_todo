@@ -19,4 +19,24 @@ public class TaskService {
     public List<Task> getAll(Boolean done) {
         return done == null ? taskRepository.getAll() : taskRepository.getAllDone(done);
     }
+
+    public Task findById(int id) {
+        return taskRepository.findById(id);
+    }
+
+    public Task add(Task task) {
+        return taskRepository.add(task);
+    }
+
+    public boolean update(Task task) {
+        return taskRepository.update(task);
+    }
+
+    public boolean complete(int id) {
+        return taskRepository.complete(id);
+    }
+
+    public boolean delete(int id) {
+        return taskRepository.delete(id);
+    }
 }

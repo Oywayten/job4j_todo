@@ -15,7 +15,9 @@ public interface TaskRepository {
 
     Task findById(int id);
 
-    Task save(Task task);
+    Task add(Task task);
+
+    boolean update(Task task);
 
     boolean complete(int id);
 

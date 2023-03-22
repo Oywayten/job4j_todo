@@ -21,7 +21,7 @@
 <body class="body text-bg-dark">
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="/">TODO List</a>
+        <a class="navbar-brand" href="/index">TODO List</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,11 +29,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks}"> All </a>
+                   th:href="@{/}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks/completed}"> Completed </a>
+                   th:href="@{/completed}"> Completed </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks/new}"> New </a>
+                   th:href="@{/new}"> New </a>
             </div>
         </div>
     </nav>
@@ -43,7 +43,7 @@
                 New task
             </div>
             <div class="card-body">
-                <form th:action="@{/createTask}" method="POST">
+                <form th:action="@{/create}" method="POST">
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
                         <label for="title">Title <span class="red">*</span>

@@ -1,6 +1,7 @@
 package ru.job4j.todo.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -11,12 +12,16 @@ import java.time.LocalDateTime;
  * Oywayten 15.03.2023.
  */
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"description", "created"}, name = "description_created")})
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Task {
 
+    /**
+     * <a href="https://stackoverflow.com/a/1638886">How should equals and hashcode be implemented when using JPA and Hibernate</a>
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private int id;
 
     @NotBlank
@@ -28,8 +33,8 @@ public class Task {
     private String description;
 
     @CreationTimestamp
-    @Column(updatable = false, nullable = false, columnDefinition = "TIMESTAMP NOT NULL DEFAULT current_timestamp")
-    private LocalDateTime created;
+    @Column(updatable = false, nullable = false)
+    private LocalDateTime created = LocalDateTime.now();
 
     @Column(nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
     private boolean done;

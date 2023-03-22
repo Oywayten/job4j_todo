@@ -12,6 +12,7 @@ import java.text.MessageFormat;
  * Oywayten 17.03.2023.
  */
 @Controller
+@RequestMapping({"/tasks", "/"})
 public class TaskController {
 
     private final TaskService taskService;
@@ -25,62 +26,81 @@ public class TaskController {
         return "index";
     }
 
-    @GetMapping("/tasks")
+    @GetMapping
     public String tasks(final Model model) {
         model.addAttribute("tasks", taskService.getAll(null));
         return "task/list";
     }
 
-    @GetMapping("/tasks/completed")
-    public String completedTaskList(final Model model) {
+    @GetMapping("/completed")
+    public String completedTasks(final Model model) {
         model.addAttribute("tasks", taskService.getAll(true));
         return "task/completed-tasks-list";
     }
 
-    @GetMapping("/tasks/new")
-    public String newTaskList(final Model model) {
+    @GetMapping("/new")
+    public String newTasks(final Model model) {
         model.addAttribute("tasks", taskService.getAll(false));
         return "task/new-tasks-list";
     }
 
-    @GetMapping("/tasks/{id}")
+    @GetMapping("/{id}")
     public String task(final Model model, @PathVariable("id") int id) {
-        model.addAttribute("task", taskService.findById(id));
+        Task task = taskService.findById(id);
+        if (null == task) {
+            return goToError(model, MessageFormat.format("Error displaying task with id = {0}", id));
+        }
+        model.addAttribute("task", task);
         return "task/description";
     }
 
-    @GetMapping("/addTaskForm")
-    public String addTask() {
+    @GetMapping("/addForm")
+    public String add() {
         return "task/add";
     }
 
-    @PostMapping("/createTask")
-    public String createTask(@ModelAttribute Task task) {
-        taskService.add(task);
+    @PostMapping("/create")
+    public String create(Model model, @ModelAttribute Task task) {
+        if (null == taskService.add(task)) {
+            return goToError(model, MessageFormat.format("Task creation error with title = {0} and description = {1}",
+                    task.getTitle(), task.getDescription()));
+        }
         return "redirect:/tasks";
     }
 
-    @GetMapping("/formUpdateTask/{id}")
-    public String createTask(final Model model, @PathVariable("id") int id) {
+    @GetMapping("/updateForm")
+    public String updateForm(final Model model, @RequestParam("id") int id) {
         model.addAttribute("task", taskService.findById(id));
         return "task/edit";
     }
 
-    @PostMapping("/updateTask")
-    public String updateTask(@ModelAttribute Task task) {
-        taskService.update(task);
+    @PostMapping("/update")
+    public String update(Model model, @ModelAttribute Task task) {
+        if (!taskService.update(task)) {
+            return goToError(model, MessageFormat.format("Error updating task with id = {0}", task.getId()));
+        }
         return MessageFormat.format("redirect:/tasks/{0}", task.getId());
     }
 
-    @PostMapping("/completeTask")
-    public String completeTask(@RequestParam("id") int id) {
-        taskService.complete(id);
+    @PostMapping("/complete")
+    public String complete(Model model, @RequestParam("id") int id) {
+        if (!taskService.complete(id)) {
+            return goToError(model, MessageFormat.format("Error completing task with id = {0}", id));
+        }
         return MessageFormat.format("redirect:/tasks/{0}", id);
     }
 
-    @PostMapping("/deleteTask")
-    public String addTask(@RequestParam("id") int id) {
-        taskService.delete(id);
+    @PostMapping("/delete")
+    public String delete(Model model, @RequestParam("id") int id) {
+        if (!taskService.delete(id)) {
+            return goToError(model, MessageFormat.format("Error deleting task with id = {0}", id));
+        }
         return "redirect:/tasks";
+    }
+
+    @GetMapping("/goToError")
+    public String goToError(Model model, String message) {
+        model.addAttribute("message", message);
+        return "/error";
     }
 }

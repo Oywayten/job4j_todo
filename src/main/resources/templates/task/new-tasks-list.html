@@ -16,7 +16,7 @@
 <body class="body text-bg-dark">
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="/" th:href="@{/index}">TODO List</a>
+        <a class="navbar-brand" href="/index" th:href="@{/index}">TODO List</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -25,13 +25,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav">
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks}"> All </a>
+                   th:href="@{/}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/tasks/completed}"> Completed </a>
+                   th:href="@{/completed}"> Completed </a>
                 <a class="nav-item nav-link active"
-                   th:href="@{/tasks/new}"> New </a>
+                   th:href="@{/new}"> New </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/addTaskForm}"> +Task
+                   th:href="@{/addForm}"> +Task
                 </a>
             </div>
         </div>

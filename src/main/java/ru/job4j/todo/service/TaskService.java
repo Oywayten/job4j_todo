@@ -25,11 +25,11 @@ public class TaskService {
     }
 
     public Task add(Task task) {
-        return taskRepository.save(task);
+        return taskRepository.add(task);
     }
 
-    public Task update(Task task) {
-        return taskRepository.save(task);
+    public boolean update(Task task) {
+        return taskRepository.update(task);
     }
 
     public boolean complete(int id) {

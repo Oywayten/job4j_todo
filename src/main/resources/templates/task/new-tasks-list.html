@@ -10,7 +10,7 @@
           rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <title>TODO List</title>
+    <title>TODO List | new tasks</title>
 
 </head>
 <body class="body text-bg-dark">
@@ -25,13 +25,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav">
                 <a class="nav-item nav-link"
-                   th:href="@{/}"> All </a>
+                   th:href="@{/tasks}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/completed}"> Completed </a>
+                   th:href="@{/tasks/completed}"> Completed </a>
                 <a class="nav-item nav-link active"
-                   th:href="@{/new}"> New </a>
+                   th:href="@{/tasks/new}"> New </a>
                 <a class="nav-item nav-link"
-                   th:href="@{/addForm}"> +Task
+                   th:href="@{/tasks/addForm}"> +Task
+                </a>
+                <a class="nav-item nav-link" th:href="@{/logout}">
+                    <span th:text="${user.name}">UserName</span>
+                    <span> | Выйти</span>
                 </a>
             </div>
         </div>

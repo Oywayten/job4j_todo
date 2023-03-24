@@ -2,12 +2,10 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-		https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+		https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <include file="scripts/001_ddl_create_task_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/002_dml_task_populate.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/003_ddl_create_todo_user_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/004_dml_todo_user_populate.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

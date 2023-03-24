@@ -10,7 +10,7 @@
           rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <title>TODO List</title>
+    <title>TODO List | error</title>
 
 </head>
 <body class="body text-bg-dark">
@@ -30,6 +30,11 @@
                    th:href="@{/completed}"> Completed </a>
                 <a class="nav-item nav-link"
                    th:href="@{/new}"> New </a>
+                <a class="nav-item nav-link" th:if="${user.name != 'Гость'}"
+                   th:href="@{/logout}">
+                    <span th:text="${user.name}">UserName</span>
+                    <span> | Выйти</span>
+                </a>
             </div>
         </div>
     </nav>

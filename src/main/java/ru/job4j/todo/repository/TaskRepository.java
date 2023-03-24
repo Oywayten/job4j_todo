@@ -1,8 +1,9 @@
-package ru.job4j.todo.store;
+package ru.job4j.todo.repository;
 
 import ru.job4j.todo.model.Task;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Oywayten 17.03.2023.
@@ -11,11 +12,11 @@ public interface TaskRepository {
 
     List<Task> getAll();
 
-    List<Task> getAllDone(Boolean done);
+    List<Task> findByStatus(Boolean done);
 
-    Task findById(int id);
+    Optional<Task> findById(int id);
 
-    Task add(Task task);
+    Optional<Task> add(Task task);
 
     boolean update(Task task);
 

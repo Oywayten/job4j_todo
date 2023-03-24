@@ -3,9 +3,10 @@ package ru.job4j.todo.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.todo.model.Task;
-import ru.job4j.todo.store.TaskRepository;
+import ru.job4j.todo.repository.TaskRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Oywayten 17.03.2023.
@@ -16,15 +17,18 @@ public class TaskService {
 
     public final TaskRepository taskRepository;
 
-    public List<Task> getAll(Boolean done) {
-        return done == null ? taskRepository.getAll() : taskRepository.getAllDone(done);
+    public List<Task> getAll() {
+        return taskRepository.getAll();
+    }
+    public List<Task> findByStatus(Boolean done) {
+        return taskRepository.findByStatus(done);
     }
 
-    public Task findById(int id) {
+    public Optional<Task> findById(int id) {
         return taskRepository.findById(id);
     }
 
-    public Task add(Task task) {
+    public Optional<Task> add(Task task) {
         return taskRepository.add(task);
     }
 

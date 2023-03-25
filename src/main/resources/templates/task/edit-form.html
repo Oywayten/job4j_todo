@@ -46,7 +46,7 @@
             <div class="card-header" th:text="|Edit task: ${task.title}|">
             </div>
             <div class="card-body">
-                <form th:action="@{/update}" method="POST" th:object="${task}">
+                <form th:action="@{/tasks/update}" method="POST" th:object="${task}">
                     <input type="hidden" name="id" th:value="*{id}"/>
                     <div class="form-group">
                         <label for="title">Title <span class="red">*</span>

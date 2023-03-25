@@ -25,13 +25,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active"
-                   th:href="@{/}"> All </a>
+                   th:href="@{/tasks}"> All </a>
                 <a class="nav-item nav-link"
-                   th:href="@{tasks/completed}"> Completed </a>
+                   th:href="@{/tasks/completed}"> Completed </a>
                 <a class="nav-item nav-link"
-                   th:href="@{tasks/new}"> New </a>
+                   th:href="@{/tasks/new}"> New </a>
                 <a class="nav-item nav-link"
-                   th:href="@{tasks/addForm}"> +Task
+                   th:href="@{/tasks/add-form}"> +Task
                 </a>
                 <a class="nav-item nav-link" th:href="@{/logout}">
                     <span th:text="${user.name}">UserName</span>

@@ -29,27 +29,27 @@ public class TaskController {
     public String tasks(final Model model, HttpSession session) {
         model.addAttribute("tasks", taskService.getAll());
         setUser(session, model);
-        return "task/list";
+        return "/task/list";
     }
 
     @GetMapping("/completed")
     public String completedTasks(final Model model, HttpSession session) {
         model.addAttribute("tasks", taskService.findByStatus(true));
         setUser(session, model);
-        return "task/completed-tasks-list";
+        return "/task/completed-tasks-list";
     }
 
     @GetMapping("/new")
     public String newTasks(final Model model, HttpSession session) {
         model.addAttribute("tasks", taskService.findByStatus(false));
         setUser(session, model);
-        return "task/new-tasks-list";
+        return "/task/new-tasks-list";
     }
 
-    @GetMapping("/addForm")
+    @GetMapping("/add-form")
     public String add(Model model, HttpSession session) {
         setUser(session, model);
-        return "task/add";
+        return "/task/add-form";
     }
 
     @PostMapping("/create")
@@ -69,18 +69,18 @@ public class TaskController {
             return goToError(model, MessageFormat.format("Error displaying task with id = {0}", id));
         }
         model.addAttribute("task", task.get());
-        return "task/description";
+        return "/task/description";
     }
 
     @GetMapping("/edit-form")
     public String editForm(final Model model, @RequestParam("id") int id, HttpSession session) {
         Optional<Task> optionalTask = taskService.findById(id);
+        setUser(session, model);
         if (optionalTask.isEmpty()) {
-            setUser(session, model);
             return goToError(model, MessageFormat.format("Error show update form for task with id = {0}",id));
         }
         model.addAttribute("task", optionalTask.get());
-        return "task/edit-form";
+        return "/task/edit-form";
     }
 
     @PostMapping("/update")
@@ -112,6 +112,6 @@ public class TaskController {
 
     public String goToError(Model model, String message) {
         model.addAttribute("message", message);
-        return "error";
+        return "/error";
     }
 }

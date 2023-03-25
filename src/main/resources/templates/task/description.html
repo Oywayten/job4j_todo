@@ -63,13 +63,13 @@
     <div>
         <form method="POST" th:object="${task}" style="display: inline">
             <input type="hidden" name="id" th:value="*{id}"/>
-            <button th:if="${!task.done}" formaction="/complete" type="submit" class="btn btn-primary btn-sm m-1">
+            <button th:if="${!task.done}" formaction="/tasks/complete" type="submit" class="btn btn-primary btn-sm m-1">
                 Complete
             </button>
-            <button th:if="${!task.done}" formaction="/edit-form" formmethod="get" type="submit" class="btn btn-primary btn-sm m-1">
+            <button th:if="${!task.done}" formaction="/tasks/edit-form" formmethod="get" type="submit" class="btn btn-primary btn-sm m-1">
                 Edit
             </button>
-            <button type="submit" formaction="/delete" class="btn btn-primary btn-sm m-1">Delete</button>
+            <button type="submit" formaction="/tasks/delete" class="btn btn-primary btn-sm m-1">Delete</button>
         </form>
     </div>
 </div>

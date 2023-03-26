@@ -36,9 +36,9 @@
                 New user
             </div>
             <div class="card-body">
-<!--                <div th:if="${message != null}" class="alert alert-danger" role="alert" th:text="${message}">
-                    Пользователь с такой почтой уже существует
-                </div>-->
+                <div th:if="${message != null}" class="alert alert-danger" role="alert" th:text="${message}">
+                    User with this login already exists
+                </div>
                 <form th:action="@{/users/registration}" method="POST">
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">

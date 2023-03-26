@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -19,6 +20,14 @@ import java.util.function.Function;
 public class CrudRepository {
 
     private final SessionFactory sf;
+
+    public void run(Consumer<Session> command) {
+        tx(session -> {
+                    command.accept(session);
+                    return null;
+                }
+        );
+    }
 
     public Integer run(String query, Map<String, Object> args) {
         Function<Session, Integer> command = session -> {

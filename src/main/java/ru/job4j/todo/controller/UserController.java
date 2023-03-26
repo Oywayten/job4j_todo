@@ -3,6 +3,7 @@ package ru.job4j.todo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.UserService;
 
@@ -28,13 +29,11 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute User user) {
-        /* Закомментировал, так как в HibernateUserRepository надо поставить throw e,
-            и в итоге редирект не выполняется всё равно с сообщением.
+    public String registration(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
         if (userService.add(user).isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "User with this email already exists");
-            return "redirect:/add-user";
-        }*/
+            redirectAttributes.addFlashAttribute("message", "User with this login already exists");
+            return "redirect:/users/add-user";
+        }
         userService.add(user);
         return "redirect:/tasks";
     }

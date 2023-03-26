@@ -1,6 +1,7 @@
 package ru.job4j.todo.repository;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.User;
 
@@ -19,10 +20,14 @@ public class HibernateUserRepository implements UserRepository {
 
     @Override
     public Optional<User> add(User user) {
-        return crudRepository.tx(session -> {
-            session.persist(user);
-            return Optional.ofNullable(user);
-        });
+        Optional<User> userOptional;
+        try {
+            crudRepository.run(session -> session.save(user));
+            userOptional = Optional.of(user);
+        } catch (HibernateException e) {
+            userOptional = Optional.empty();
+        }
+        return userOptional;
     }
 
     @Override

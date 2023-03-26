@@ -38,4 +38,8 @@ public class Task {
 
     @Column(nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
     private boolean done;
+
+    @ManyToOne
+    @JoinColumn(name = "todo_user_id")
+    private User user;
 }

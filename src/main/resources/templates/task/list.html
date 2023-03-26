@@ -57,23 +57,20 @@
                     </thead>
                     <tbody class="table-group-divider">
                     <tr th:each="task: ${tasks}">
-                        <td th:utext="*{task.id}"> 1</td>
+                        <td th:text="*{task.id}"> 1</td>
                         <td>
                             <a th:href="@{|/tasks/${task.id}|}"
                                th:text="*{task.title}"
                                href="https://ya.ru"> This is a title</a>
                         </td>
-                        <td>
-                            <a th:href="@{|/tasks/${task.id}|}"
-                               th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}"
-                               href="https://ya.ru"> This is a description</a>
+                        <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}">
+                            2020-01-01 11:11:11
                         </td>
-                        <td>
-                            <a th:href="@{|/tasks/${task.id}|}"
-                               th:text="${task.done} ? 'Completed': 'New'"
-                               href="https://ya.ru">
-                                Completed
-                            </a>
+                        <td th:text="*{task.done} ? 'Completed': 'New'">
+                            Completed
+                        </td>
+                        <td th:text="*{task.user.name}">
+                            User_Name
                         </td>
                     </tr>
                     </tbody>

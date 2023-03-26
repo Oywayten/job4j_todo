@@ -1,0 +1,1 @@
+ALTER TABLE task add COLUMN todo_user_id INTEGER REFERENCES todo_user(id);

@@ -8,4 +8,6 @@
     <include file="scripts/002_dml_task_populate.sql" relativeToChangelogFile="true"/>
     <include file="scripts/003_ddl_create_todo_user_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/004_dml_todo_user_populate.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/005_ddl_alter_table_task_add_todo_user_id.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/006_ddl_update_data_table_task.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

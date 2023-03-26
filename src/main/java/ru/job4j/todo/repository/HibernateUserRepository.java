@@ -2,6 +2,8 @@ package ru.job4j.todo.repository;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.User;
 
@@ -17,15 +19,16 @@ public class HibernateUserRepository implements UserRepository {
 
     private static final String FIND_USER_BY_LOGIN_AND_PASSWORD = "from User where login = :login and password = :password";
     private final CrudRepository crudRepository;
+    public static final Logger LOG = LoggerFactory.getLogger(HibernateUserRepository.class);
 
     @Override
     public Optional<User> add(User user) {
-        Optional<User> userOptional;
+        Optional<User> userOptional = Optional.empty();
         try {
             crudRepository.run(session -> session.save(user));
             userOptional = Optional.of(user);
         } catch (HibernateException e) {
-            userOptional = Optional.empty();
+            LOG.error("Add user error");
         }
         return userOptional;
     }

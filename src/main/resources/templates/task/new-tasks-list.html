@@ -53,6 +53,8 @@
                         <th scope="col">Title</th>
                         <th scope="col">Created</th>
                         <th scope="col">Result</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Priority</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -71,6 +73,9 @@
                         </td>
                         <td th:text="*{task.user.name}">
                             User_Name
+                        </td>
+                        <td th:text="*{task.priority.name}">
+                            Priority
                         </td>
                     </tr>
                     </tbody>

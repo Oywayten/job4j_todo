@@ -2,7 +2,6 @@ package ru.job4j.todo.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -28,18 +27,17 @@ public class Task {
     @Column(nullable = false)
     private String title;
 
-    @NotBlank
-    @Column(nullable = false)
     private String description;
 
-    @CreationTimestamp
-    @Column(updatable = false, nullable = false)
-    private LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created;
 
-    @Column(nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
     private boolean done;
 
     @ManyToOne
     @JoinColumn(name = "todo_user_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "priority_id")
+    private Priority priority;
 }

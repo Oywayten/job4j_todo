@@ -17,18 +17,20 @@ public class HibernateTaskRepository implements TaskRepository {
 
     private static final String COMPLETE = "UPDATE Task SET done = true WHERE id = :id";
     private static final String DELETE = "DELETE Task WHERE id = :id";
-    private static final String GET_ALL = "from Task";
-    private static final String GET_ALL_DONE = String.format("%s where done = :done", GET_ALL);
+    private static final String JOIN_FETCH_PRIORITY = "JOIN FETCH t.priority";
+    private static final String GET_ALL = "from Task t";
+    private static final String GET_ALL_WITH_PRIORITY = String.format("%s %s", GET_ALL, JOIN_FETCH_PRIORITY);
+    private static final String GET_ALL_DONE_WITH_PRIORITY = String.format("%s where t.done = :done", GET_ALL_WITH_PRIORITY);
     private final CrudRepository crudRepository;
 
     @Override
     public List<Task> getAll() {
-        return crudRepository.query(GET_ALL, Task.class);
+        return crudRepository.query(GET_ALL_WITH_PRIORITY, Task.class);
     }
 
     @Override
     public List<Task> findByStatus(Boolean done) {
-        return crudRepository.query(GET_ALL_DONE, Task.class, Map.of("done", done));
+        return crudRepository.query(GET_ALL_DONE_WITH_PRIORITY, Task.class, Map.of("done", done));
     }
 
     @Override

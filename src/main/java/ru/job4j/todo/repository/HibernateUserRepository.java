@@ -28,7 +28,7 @@ public class HibernateUserRepository implements UserRepository {
             crudRepository.run(session -> session.save(user));
             userOptional = Optional.of(user);
         } catch (HibernateException e) {
-            LOG.error("Add user error");
+            LOG.error("Add user error", e);
         }
         return userOptional;
     }

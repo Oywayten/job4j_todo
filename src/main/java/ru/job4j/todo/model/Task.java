@@ -6,10 +6,20 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Oywayten 15.03.2023.
  */
+@NamedEntityGraph(
+        name = "task-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("user"),
+                @NamedAttributeNode("priority"),
+                @NamedAttributeNode("categories"),
+        }
+)
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -29,7 +39,7 @@ public class Task {
 
     private String description;
 
-    private LocalDateTime created;
+    private LocalDateTime created = LocalDateTime.now();
 
     private boolean done;
 
@@ -40,4 +50,12 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "priority_id")
     private Priority priority;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "task_category",
+            joinColumns = {@JoinColumn(name = "task_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
+    private List<Category> categories = new ArrayList<>();
 }

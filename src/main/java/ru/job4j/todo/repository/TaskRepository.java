@@ -1,5 +1,6 @@
 package ru.job4j.todo.repository;
 
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 
 import java.util.List;
@@ -23,4 +24,8 @@ public interface TaskRepository {
     boolean complete(int id);
 
     boolean delete(int id);
+
+    List<Category> getAllCategory();
+
+    Optional<Category> getCategoryById(int id);
 }

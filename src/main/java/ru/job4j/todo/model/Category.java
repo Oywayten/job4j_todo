@@ -1,24 +1,20 @@
 package ru.job4j.todo.model;
 
-import javax.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import lombok.*;
+import javax.persistence.*;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@NoArgsConstructor
-@RequiredArgsConstructor
-@Table(name = "priority")
-public class Priority {
+@Table(name = "category")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @NonNull
     private int id;
 
     private String name;
-
-    private int position;
 }

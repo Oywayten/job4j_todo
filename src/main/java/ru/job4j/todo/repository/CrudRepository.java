@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.graph.RootGraph;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -54,9 +55,13 @@ public class CrudRepository {
     }
 
     public <T> List<T> query(String query, Class<T> cl) {
-        Function<Session, List<T>> command = session -> session
-                .createQuery(query, cl)
-                .list();
+        Function<Session, List<T>> command = session -> {
+            var sq = session
+                    .createQuery(query, cl);
+            RootGraph<?> entityGraph = session.getEntityGraph("task-entity-graph");
+            sq.setHint("javax.persistence.fetchgraph", entityGraph);
+            return sq.list();
+        };
         return tx(command);
     }
 
@@ -67,6 +72,8 @@ public class CrudRepository {
             for (Map.Entry<String, Object> arg : args.entrySet()) {
                 sq.setParameter(arg.getKey(), arg.getValue());
             }
+            RootGraph<?> entityGraph = session.getEntityGraph("task-entity-graph");
+            sq.setHint("javax.persistence.fetchgraph", entityGraph);
             return sq.list();
         };
         return tx(command);

@@ -3,11 +3,16 @@ package ru.job4j.todo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.todo.model.Category;
+import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.model.Task;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.TaskService;
 
 import javax.servlet.http.HttpSession;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static ru.job4j.todo.util.Util.setUser;
@@ -49,11 +54,24 @@ public class TaskController {
     @GetMapping("/add-form")
     public String add(Model model, HttpSession session) {
         setUser(session, model);
+        model.addAttribute("categories", taskService.getAllCategory());
         return "/task/add-form";
     }
 
     @PostMapping("/create")
-    public String create(Model model, @ModelAttribute Task task) {
+    public String create(Model model, @ModelAttribute Task task, @RequestParam("category") List<Integer> categories, HttpSession session) {
+        Optional<Category> optionalCategory;
+        List<Category> categoryList = new ArrayList<>();
+        for (Integer id : categories) {
+            optionalCategory = taskService.getCategoryById(id);
+            if (optionalCategory.isEmpty()) {
+                return goToError(model, MessageFormat.format("Error adding category id = {0} to task", id));
+            }
+            categoryList.add(optionalCategory.get());
+        }
+        task.setCategories(categoryList);
+        task.setUser((User) session.getAttribute("user"));
+        task.setPriority(new Priority(1));
         if (taskService.add(task).isEmpty()) {
             return goToError(model, MessageFormat.format("Task creation error with title = {0} and description = {1}",
                     task.getTitle(), task.getDescription()));
@@ -77,7 +95,7 @@ public class TaskController {
         Optional<Task> optionalTask = taskService.findById(id);
         setUser(session, model);
         if (optionalTask.isEmpty()) {
-            return goToError(model, MessageFormat.format("Error show update form for task with id = {0}",id));
+            return goToError(model, MessageFormat.format("Error show update form for task with id = {0}", id));
         }
         model.addAttribute("task", optionalTask.get());
         return "/task/edit-form";

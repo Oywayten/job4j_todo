@@ -55,6 +55,7 @@
                         <th scope="col">Result</th>
                         <th scope="col">User</th>
                         <th scope="col">Priority</th>
+                        <th scope="col">Category</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -76,6 +77,9 @@
                         </td>
                         <td th:text="*{task.priority.name}">
                             Priority
+                        </td>
+                        <td>
+                            <p th:each="category: ${task.categories}" th:text="*{category.name}"></p>
                         </td>
                     </tr>
                     </tbody>

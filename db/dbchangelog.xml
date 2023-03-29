@@ -14,4 +14,8 @@
     <include file="scripts/008_dml_populate_priority_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/009_ddl_alter_table_task.sql" relativeToChangelogFile="true"/>
     <include file="scripts/010_dml_update_task.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/011_ddl_create_category_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/012_dml_populate_category_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/013_ddl_create_task_category_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/014_dml_populate_task_category_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

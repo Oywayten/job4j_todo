@@ -1,1 +1,1 @@
-ALTER TABLE task ADD COLUMN priority_id INT REFERENCES priority(id) DEFAULT '1';
+ALTER TABLE task ADD COLUMN priority_id INT REFERENCES priority(id);

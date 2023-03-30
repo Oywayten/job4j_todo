@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.model.User;
+import ru.job4j.todo.service.CategoryService;
 import ru.job4j.todo.service.TaskService;
 
 import javax.servlet.http.HttpSession;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +24,11 @@ import static ru.job4j.todo.util.Util.setUser;
 public class TaskController {
 
     private final TaskService taskService;
+    private final CategoryService categoryService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, CategoryService categoryService) {
         this.taskService = taskService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping
@@ -53,24 +55,21 @@ public class TaskController {
     @GetMapping("/add-form")
     public String add(Model model, HttpSession session) {
         setUser(session, model);
-        model.addAttribute("categories", taskService.getAllCategory());
+        model.addAttribute("categories", categoryService.getAll());
         return "/task/add-form";
     }
 
     @PostMapping("/create")
-    public String create(Model model, @ModelAttribute Task task, @RequestParam("category") List<Integer> categories, HttpSession session) {
-        Optional<Category> optionalCategory;
-        List<Category> categoryList = new ArrayList<>();
-        for (Integer id : categories) {
-            optionalCategory = taskService.getCategoryById(id);
-            if (optionalCategory.isEmpty()) {
-                return goToError(model, MessageFormat.format("Error adding category id = {0} to task", id));
-            }
-            categoryList.add(optionalCategory.get());
+    public String create(Model model, @ModelAttribute Task task, @RequestParam("category") List<Integer> categoryIds, HttpSession session) {
+        List<Category> categories = categoryService.findByIds(categoryIds);
+        if (categories.isEmpty()) {
+            setUser(session, model);
+            return goToError(model, "Error adding categories to task");
         }
-        task.setCategories(categoryList);
+        task.setCategories(categories);
         task.setUser((User) session.getAttribute("user"));
         if (taskService.add(task).isEmpty()) {
+            setUser(session, model);
             return goToError(model, MessageFormat.format("Task creation error with title = {0} and description = {1}",
                     task.getTitle(), task.getDescription()));
         }

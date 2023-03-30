@@ -2,7 +2,6 @@ package ru.job4j.todo.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 
 import java.util.List;
@@ -22,7 +21,6 @@ public class HibernateTaskRepository implements TaskRepository {
     private static final String ORDER_BY_ID_ASC = "ORDER BY id ASC";
     private static final String GET_ALL_WITH_ORDER_BY_ASC = String.format("%s %s", GET_ALL, ORDER_BY_ID_ASC);
     private static final String GET_ALL_DONE_WITH_ORDER_BY_ASC = String.format("%s WHERE done = :done %s", GET_ALL, ORDER_BY_ID_ASC);
-    private static final String FROM_CATEGORY = "FROM Category";
     private final CrudRepository crudRepository;
 
     @Override
@@ -64,15 +62,5 @@ public class HibernateTaskRepository implements TaskRepository {
     @Override
     public boolean delete(int id) {
         return crudRepository.run(DELETE, Map.of("id", id)) == 1;
-    }
-
-    @Override
-    public List<Category> getAllCategory() {
-        return crudRepository.query(FROM_CATEGORY, Category.class);
-    }
-
-    @Override
-    public Optional<Category> getCategoryById(int id) {
-        return Optional.ofNullable(crudRepository.tx(session -> session.find(Category.class, id)));
     }
 }

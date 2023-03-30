@@ -2,7 +2,6 @@ package ru.job4j.todo.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.repository.TaskRepository;
 
@@ -43,13 +42,5 @@ public class TaskService {
 
     public boolean delete(int id) {
         return taskRepository.delete(id);
-    }
-
-    public List<Category> getAllCategory() {
-        return taskRepository.getAllCategory();
-    }
-
-    public Optional<Category> getCategoryById(int id) {
-        return taskRepository.getCategoryById(id);
     }
 }

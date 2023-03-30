@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.todo.model.Category;
-import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.TaskService;
@@ -71,7 +70,6 @@ public class TaskController {
         }
         task.setCategories(categoryList);
         task.setUser((User) session.getAttribute("user"));
-        task.setPriority(new Priority(1));
         if (taskService.add(task).isEmpty()) {
             return goToError(model, MessageFormat.format("Task creation error with title = {0} and description = {1}",
                     task.getTitle(), task.getDescription()));

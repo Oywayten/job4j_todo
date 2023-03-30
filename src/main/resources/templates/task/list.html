@@ -75,7 +75,7 @@
                         <td th:text="*{task.user.name}">
                             User_Name
                         </td>
-                        <td th:text="*{task.priority.name}">
+                        <td th:text="*{task.priority} ? *{task.priority.name} : 'unknown'">
                             Priority
                         </td>
                         <td>

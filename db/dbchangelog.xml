@@ -18,4 +18,5 @@
     <include file="scripts/012_dml_populate_category_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/013_ddl_create_task_category_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/014_dml_populate_task_category_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/015_ddl_alter_table_todo_user.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

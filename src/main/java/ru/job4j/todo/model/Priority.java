@@ -8,14 +8,12 @@ import lombok.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "priority")
 public class Priority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @NonNull
     private int id;
 
     private String name;

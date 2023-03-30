@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -80,7 +81,10 @@ public class CrudRepository {
     }
 
     public <T> T tx(Function<Session, T> command) {
-        Session session = sf.openSession();
+        Session session = sf
+                .withOptions()
+                .jdbcTimeZone(TimeZone.getTimeZone("UTC"))
+                .openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();

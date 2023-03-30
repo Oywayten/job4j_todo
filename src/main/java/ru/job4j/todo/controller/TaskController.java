@@ -14,6 +14,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
+import static ru.job4j.todo.util.Util.setTimezone;
 import static ru.job4j.todo.util.Util.setUser;
 
 /**
@@ -34,6 +35,7 @@ public class TaskController {
     @GetMapping
     public String tasks(final Model model, HttpSession session) {
         model.addAttribute("tasks", taskService.getAll());
+        setTimezone(session, model);
         setUser(session, model);
         return "/task/list";
     }
@@ -41,6 +43,7 @@ public class TaskController {
     @GetMapping("/completed")
     public String completedTasks(final Model model, HttpSession session) {
         model.addAttribute("tasks", taskService.findByStatus(true));
+        setTimezone(session, model);
         setUser(session, model);
         return "/task/completed-tasks-list";
     }
@@ -48,6 +51,7 @@ public class TaskController {
     @GetMapping("/new")
     public String newTasks(final Model model, HttpSession session) {
         model.addAttribute("tasks", taskService.findByStatus(false));
+        setTimezone(session, model);
         setUser(session, model);
         return "/task/new-tasks-list";
     }

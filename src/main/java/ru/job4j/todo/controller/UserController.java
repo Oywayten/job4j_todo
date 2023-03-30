@@ -9,7 +9,9 @@ import ru.job4j.todo.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.Optional;
+
+import static ru.job4j.todo.util.Util.getAvailableTimeZones;
 
 /**
  * Oywayten 22.03.2023.
@@ -25,12 +27,7 @@ public class UserController {
 
     @GetMapping("/add-user")
     public String addUser(Model model) {
-        List<TimeZone> zones = new ArrayList<>();
-        for (String timeId : TimeZone.getAvailableIDs()) {
-            zones.add(TimeZone.getTimeZone(timeId));
-        }
-        zones.sort(Comparator.comparingInt(TimeZone::getRawOffset));
-        model.addAttribute("zones", zones);
+        model.addAttribute("zones", getAvailableTimeZones());
         return "user/registration";
     }
 

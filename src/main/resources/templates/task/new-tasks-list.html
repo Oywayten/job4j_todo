@@ -65,8 +65,8 @@
                                th:text="*{task.title}"
                                href="https://ya.ru"> This is a title</a>
                         </td>
-                        <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}">
-                            2020-01-01 11:11:11
+                        <td th:text="*{task.createdWithTimezone(timezone)}">
+                            2020-01-01 11:11
                         </td>
                         <td th:text="*{task.done} ? 'Completed': 'New'">
                             Completed

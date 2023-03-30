@@ -6,8 +6,11 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Oywayten 15.03.2023.
@@ -25,9 +28,6 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Task {
 
-    /**
-     * <a href="https://stackoverflow.com/a/1638886">How should equals and hashcode be implemented when using JPA and Hibernate</a>
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -58,4 +58,12 @@ public class Task {
             inverseJoinColumns = {@JoinColumn(name = "category_id")}
     )
     private List<Category> categories = new ArrayList<>();
+
+    public String createdWithTimezone(String timezone) {
+        return created.atZone(ZoneId.of(TimeZone.getDefault().getID()))
+                .withZoneSameInstant(ZoneId.of(timezone))
+                .format(DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd"));
+    }
+
+
 }

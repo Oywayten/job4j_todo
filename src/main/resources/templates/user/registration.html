@@ -56,6 +56,11 @@
                         <label for="password">Password <span class="red">*</span>
                             <input type="text" class="form-control m-3" name="password" id="password" required>
                         </label>
+                        <label for="timezone">Timezone
+                            <select class="form-select form-select-sm mt-3" id="timezone" name="timezone">
+                                <option  th:each="zone: ${zones}" th:value="*{zone.getID().toString()}" th:text="*{zone.getDisplayName()}">Open this select menu</option>
+                            </select>
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Save</button>
                 </form>

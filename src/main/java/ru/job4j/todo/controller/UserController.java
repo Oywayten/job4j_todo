@@ -9,7 +9,7 @@ import ru.job4j.todo.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Oywayten 22.03.2023.
@@ -24,7 +24,13 @@ public class UserController {
     }
 
     @GetMapping("/add-user")
-    public String addUser() {
+    public String addUser(Model model) {
+        List<TimeZone> zones = new ArrayList<>();
+        for (String timeId : TimeZone.getAvailableIDs()) {
+            zones.add(TimeZone.getTimeZone(timeId));
+        }
+        zones.sort(Comparator.comparingInt(TimeZone::getRawOffset));
+        model.addAttribute("zones", zones);
         return "user/registration";
     }
 
@@ -57,6 +63,7 @@ public class UserController {
         }
         HttpSession session = req.getSession();
         session.setAttribute("user", userDb.get());
+        session.setAttribute("timezone", userDb.get().getTimezone());
         return "redirect:/index";
     }
 }

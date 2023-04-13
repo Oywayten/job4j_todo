@@ -15,11 +15,16 @@ The application displays a list of all tasks. Tasks can be created, deleted and 
 + Button "Delete" - deletes the task and goes to the list of all tasks.
 
 ## Technology stack:
-+ Spring boot 2,
-+ Thymeleaf 3,
-+ Bootstrap 5,
++ Java 17,
++ Maven 4.0,
 + Hibernate 5,
-+ PostgreSql 14.
++ Spring boot 2,
++ PostgreSql 14,
++ Liquibase,
++ SLF4J,
++ Lombok,
++ Thymeleaf 3,
++ Bootstrap 5,.
 
 ## Environment requirements:
 + Java 17, 

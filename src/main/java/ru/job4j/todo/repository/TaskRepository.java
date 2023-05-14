@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public interface TaskRepository {
 
-    List<Task> getAll();
+    List<Task> findAll();
 
     List<Task> findByStatus(Boolean done);
 

@@ -24,7 +24,7 @@ public class HibernateTaskRepository implements TaskRepository {
     private final CrudRepository crudRepository;
 
     @Override
-    public List<Task> getAll() {
+    public List<Task> findAll() {
         return crudRepository.query(GET_ALL_WITH_ORDER_BY_ASC, Task.class);
     }
 

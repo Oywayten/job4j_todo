@@ -24,7 +24,7 @@ public class UserService {
         return repository.add(user);
     }
 
-    public Optional<User> findUserByLoginAndPassword(String email, String pass) {
-        return repository.findUserByLoginAndPassword(email, pass);
+    public Optional<User> findByLoginAndPassword(String email, String pass) {
+        return repository.findByLoginAndPassword(email, pass);
     }
 }

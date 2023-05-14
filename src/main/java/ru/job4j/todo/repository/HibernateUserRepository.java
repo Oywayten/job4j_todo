@@ -17,7 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class HibernateUserRepository implements UserRepository {
 
-    private static final String FIND_USER_BY_LOGIN_AND_PASSWORD = "from User where login = :login and password = :password";
+    private static final String FIND_USER_BY_LOGIN_AND_PASSWORD = "FROM User WHERE login = :login AND password = :password";
     private final CrudRepository crudRepository;
     public static final Logger LOG = LoggerFactory.getLogger(HibernateUserRepository.class);
 
@@ -34,7 +34,7 @@ public class HibernateUserRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> findUserByLoginAndPassword(String login, String password) {
+    public Optional<User> findByLoginAndPassword(String login, String password) {
         return crudRepository.optional(FIND_USER_BY_LOGIN_AND_PASSWORD, User.class, Map.of("login", login, "password", password));
     }
 }

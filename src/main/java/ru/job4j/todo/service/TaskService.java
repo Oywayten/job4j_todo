@@ -18,7 +18,7 @@ public class TaskService {
     public final TaskRepository taskRepository;
 
     public List<Task> getAll() {
-        return taskRepository.getAll();
+        return taskRepository.findAll();
     }
 
     public List<Task> findByStatus(Boolean done) {

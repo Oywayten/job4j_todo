@@ -20,7 +20,7 @@ import java.util.TimeZone;
         attributeNodes = {
                 @NamedAttributeNode("user"),
                 @NamedAttributeNode("priority"),
-                @NamedAttributeNode("categories"),
+                @NamedAttributeNode("categories")
         }
 )
 @Entity
@@ -51,7 +51,7 @@ public class Task {
     @JoinColumn(name = "priority_id")
     private Priority priority;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "task_category",
             joinColumns = {@JoinColumn(name = "task_id")},

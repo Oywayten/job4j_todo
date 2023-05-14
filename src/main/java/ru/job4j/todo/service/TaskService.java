@@ -20,6 +20,7 @@ public class TaskService {
     public List<Task> getAll() {
         return taskRepository.getAll();
     }
+
     public List<Task> findByStatus(Boolean done) {
         return taskRepository.findByStatus(done);
     }

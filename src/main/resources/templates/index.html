@@ -31,6 +31,10 @@
                 <a class="nav-item nav-link"
                    th:href="@{tasks/new}"> New </a>
                 <a class="nav-item nav-link"
+                   th:if="${user.name != 'Гость'}"
+                   th:href="@{/tasks/add-form}"> +Task
+                </a>
+                <a class="nav-item nav-link"
                    th:if="${user.name == 'Гость'}"
                    th:href="@{users/login-page}">
                     <span>Log in</span>
